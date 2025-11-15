@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Forex - 10-14 Nov 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #333;
+            padding: 20px;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1a1a2e;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 3px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .currency-strength-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            gap: 15px;
+        }
+
+        .currency-label {
+            min-width: 80px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .strength-bar {
+            flex: 1;
+            height: 35px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .strength-fill {
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+
+        .strength-bullish { background: linear-gradient(90deg, #6b9a6b, #4a7c4a); }
+        .strength-neutral { background: linear-gradient(90deg, #d9c66a, #c4b156); }
+        .strength-bearish { background: linear-gradient(90deg, #c96545, #b04a2e); }
+
+        .risk-sentiment {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .risk-card {
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        .risk-on { background: linear-gradient(135deg, #6b9a6b, #4a7c4a); }
+        .risk-off { background: linear-gradient(135deg, #c96545, #b04a2e); }
+        .risk-neutral { background: linear-gradient(135deg, #d9c66a, #c4b156); }
+
+        .risk-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .risk-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .currency-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .nav-button {
+            background: white;
+            border: 3px solid transparent;
+            padding: 15px 25px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: #f8f9f7;
+        }
+
+        .nav-button.active {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .currency-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f0f0f0;
+            flex-wrap: wrap;
+        }
+
+        .currency-flag {
+            font-size: 3.5rem;
+        }
+
+        .currency-title h2 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .rate-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        .info-box {
+            background: #f8f9f7;
+            border-left: 4px solid #1a1a2e;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .info-box.warning { border-left-color: #c96545; background: #fff5f2; }
+        .info-box.success { border-left-color: #6b9a6b; background: #f0f8f0; }
+
+        .info-box strong {
+            color: #1a1a2e;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .quote-box {
+            background: #e8f4f8;
+            border-left: 4px solid #0077be;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            border-radius: 8px;
+        }
+
+        .bias-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .bias-bearish { background: #c96545; color: white; }
+        .bias-neutral { background: #d9c66a; color: #333; }
+        .bias-bullish { background: #6b9a6b; color: white; }
+
+        .watchlist-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .watchlist-table th,
+        .watchlist-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .watchlist-table th {
+            background: #1a1a2e;
+            color: white;
+            font-weight: 600;
+        }
+
+        .watchlist-table tr:hover {
+            background: #f8f9f7;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.85rem;
+            opacity: 0.95;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .header h1 { font-size: 1.8rem; }
+            .section-card { padding: 20px; }
+            .currency-nav { gap: 10px; }
+            .nav-button { padding: 10px 15px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1>📊 Rapport Forex Hebdomadaire</h1>
+            <p>Semaine du 10 au 14 novembre 2025</p>
+        </header>
+
+        <!-- Section 1: Force relative des devises -->
+        <div class="section-card">
+            <h2 class="section-title">📈 Force Relative des Devises</h2>
+            <div id="strengthChart"></div>
+        </div>
+
+        <!-- Section 2: Sentiment du risque -->
+        <div class="section-card">
+            <h2 class="section-title">🌐 Sentiment du Risque</h2>
+            <div class="risk-sentiment">
+                <div class="risk-card risk-off">
+                    <h3>⚠️ Risk-Off Modéré</h3>
+                    <p>Incertitudes politique US, shutdown terminé le 12/11, données économiques perturbées</p>
+                </div>
+                <div class="risk-card risk-neutral">
+                    <h3>🔄 Divergence BC</h3>
+                    <p>Fed, BoC, RBNZ en baisse • BoJ seule en resserrement • BCE, BoE en pause</p>
+                </div>
+                <div class="risk-card risk-off">
+                    <h3>📉 Fait Marquant</h3>
+                    <p>CPI US octobre NON PUBLIÉ - Opacité majeure sur inflation Q4</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation devises -->
+        <nav class="currency-nav" id="currencyNav"></nav>
+
+        <!-- Contenu par devise -->
+        <div class="content-card" id="currencyContent"></div>
+
+        <!-- Section 4: Watchlist -->
+        <div class="section-card">
+            <h2 class="section-title">🎯 Watchlist & Stratégies</h2>
+            
+            <h3 style="margin: 20px 0 15px 0; color: #1a1a2e;">Tableau Récapitulatif</h3>
+            <table class="watchlist-table">
+                <thead>
+                    <tr>
+                        <th>Devise</th>
+                        <th>Taux</th>
+                        <th>Dernière Action</th>
+                        <th>Biais</th>
+                        <th>Prochaine Décision</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>🇺🇸 USD</td>
+                        <td>3.75-4.00%</td>
+                        <td>Baisse 0.25% (29/10)</td>
+                        <td>🔴 Neutre-Baissier</td>
+                        <td>18 déc: Maintien 56.6% / Baisse 43.4%</td>
+                    </tr>
+                    <tr>
+                        <td>🇪🇺 EUR</td>
+                        <td>N/A</td>
+                        <td>Maintien (Oct)</td>
+                        <td>🟡 Neutre</td>
+                        <td>Déc: Probablement maintien</td>
+                    </tr>
+                    <tr>
+                        <td>🇬🇧 GBP</td>
+                        <td>4.00%</td>
+                        <td>Maintien (5/11)</td>
+                        <td>🟠 Légèrement Baissier</td>
+                        <td>18 déc: Baisse probable</td>
+                    </tr>
+                    <tr>
+                        <td>🇯🇵 JPY</td>
+                        <td>0.50%</td>
+                        <td>Maintien (Oct)</td>
+                        <td>🟢 Neutre-Haussier</td>
+                        <td>Q1 2026: Hausse 0.75% possible</td>
+                    </tr>
+                    <tr>
+                        <td>🇨🇦 CAD</td>
+                        <td>2.25%</td>
+                        <td>Baisse 0.25% (29/10)</td>
+                        <td>🔴 Baissier</td>
+                        <td>Déc: Baisse probable</td>
+                    </tr>
+                    <tr>
+                        <td>🇦🇺 AUD</td>
+                        <td>3.60%</td>
+                        <td>Maintien (4/11)</td>
+                        <td>🟡 Neutre</td>
+                        <td>8-9 déc: Maintien probable</td>
+                    </tr>
+                    <tr>
+                        <td>🇳🇿 NZD</td>
+                        <td>2.50%</td>
+                        <td>Baisse 0.50% (Oct)</td>
+                        <td>🔴 Baissier</td>
+                        <td>26 nov: Baisse 0.25-0.50%</td>
+                    </tr>
+                    <tr>
+                        <td>🇨🇭 CHF</td>
+                        <td>0.50%</td>
+                        <td>Maintien (Sep)</td>
+                        <td>🟡 Neutre-Haussier</td>
+                        <td>Maintien proche plancher</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin: 25px 0 15px 0; color: #1a1a2e;">Paires à Surveiller</h3>
+            <div class="info-box success">
+                <strong>🟢 LONGS JPY (Forte divergence)</strong>
+                JPY/CAD • JPY/NZD • JPY/USD<br>
+                <em>Rationale: BoJ seule BC en resserrement vs autres en pause/baisses</em>
+            </div>
+            
+            <div class="info-box">
+                <strong>🟢 USD vs Devises Faibles</strong>
+                USD/CAD • USD/NZD<br>
+                <em>Fed prudente vs BoC/RBNZ agressives</em>
+            </div>
+
+            <div class="info-box warning">
+                <strong>⚠️ Risques Majeurs</strong>
+                • CPI US octobre non publié (opacité inflation)<br>
+                • Décision Fed 18 déc (probabilités serrées 56/43)<br>
+                • Tarifs Trump 2.0 Q1 2026 (impact CAD, JPY, EUR)
+            </div>
+        </div>
+
+        <!-- Section 5: Événements à venir -->
+        <div class="section-card">
+            <h2 class="section-title">📅 Événements Clés à Venir</h2>
+            <table class="watchlist-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Événement</th>
+                        <th>Importance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>26 novembre</td>
+                        <td>Décision RBNZ (NZD)</td>
+                        <td>⚠️⚠️</td>
+                    </tr>
+                    <tr>
+                        <td>8-9 décembre</td>
+                        <td>Décision RBA (AUD)</td>
+                        <td>⚠️</td>
+                    </tr>
+                    <tr>
+                        <td>Décembre</td>
+                        <td>Décision BCE (EUR)</td>
+                        <td>⚠️⚠️</td>
+                    </tr>
+                    <tr>
+                        <td>18 décembre</td>
+                        <td>Décision Fed (USD)</td>
+                        <td>⚠️⚠️⚠️</td>
+                    </tr>
+                    <tr>
+                        <td>18 décembre</td>
+                        <td>Décision BoE (GBP)</td>
+                        <td>⚠️⚠️</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="footer">
+            <p>📌 Sources: Federal Reserve, ECB, BoE, BoJ, BoC, RBA, RBNZ, SNB | CME FedWatch Tool</p>
+            <p style="margin-top: 10px;">Méthodologie: Sources officielles uniquement • Aucune donnée inventée</p>
+        </footer>
+    </div>
+
+    <script>
+        const currencyData = {
+            USD: {
+                name: "Dollar américain",
+                flag: "🇺🇸",
+                rate: "3.75-4.00%",
+                lastAction: "Baisse 0.25% (29/10)",
+                bias: { type: "bearish", label: "🔴 Neutre-Baissier", strength: -15 },
+                
+                calendar: "⚠️ CPI Octobre NON PUBLIÉ - Shutdown gouvernemental empêché collecte données",
+                
+                news: [
+                    "Décision FOMC 29/10: Baisse 0.25% à 3.75-4.00%",
+                    "Vote: 2 dissidences (Miran voulait -0.50%, Jeffrey détails non précisés)",
+                    "Activité: Expansion modérée • Emploi: Ralentissement mais résilient",
+                    "Inflation: 'Somewhat elevated' • Core PCE: 2.7% YoY"
+                ],
+                
+                fedwatch: "CME FedWatch (14/11): Maintien 3.75-4% = 56.6% • Baisse à 3.5-3.75% = 43.4%",
+                
+                quotes: [
+                    {
+                        text: "Available indicators suggest that economic activity has been expanding at a moderate pace. Job gains have slowed this year, and the unemployment rate has edged up but remained low.",
+                        source: "FOMC Statement, 29 octobre 2025"
+                    },
+                    {
+                        text: "Powell: 'Décembre n'est pas acquis' - Signal de prudence accrue",
+                        source: "Commentaires post-FOMC, 29 octobre"
+                    }
+                ],
+                
+                analysis: "Fed en mode data-dependent avec opacité majeure (CPI manquant). Probabilités décembre divisées 50/50. Dollar soutenu court terme par prudence Fed vs autres BC accommodantes.",
+                
+                strengths: "Fed prudente vs autres BC • Données manquantes favorisent statu quo • Économie US résiliente",
+                weaknesses: "Cycle baisse en cours (-50bp depuis pic) • Division FOMC croissante • Visibilité réduite inflation Q4"
+            },
+
+            EUR: {
+                name: "Euro",
+                flag: "🇪🇺",
+                rate: "N/A",
+                lastAction: "Maintien (Oct)",
+                bias: { type: "neutral", label: "🟡 Neutre", strength: 0 },
+                
+                calendar: "Pas de réunion BCE cette semaine • Publications: Stats fonds investissement, émissions titres, véhicules financiers",
+                
+                news: [
+                    "Dernière décision: Octobre (taux maintenu) • Prochaine: Décembre 2025",
+                    "Discours Schnabel (12/11): BNP Paribas Conference - 'Europe Reimagined'",
+                    "Discours Lane (14/11): Panel SNB/Trinity - Globalisation secteur externe",
+                    "FMI: Croissance européenne qualifiée de 'médiocre'"
+                ],
+                
+                quotes: [
+                    {
+                        text: "Central bank independence is key because it is the best way to keep inflation under control. In October 2022, even though inflation in the euro area was above 10%, inflation expectations were anchored.",
+                        source: "Luis de Guindos, Interview 10 novembre 2025"
+                    }
+                ],
+                
+                analysis: "Absence catalyseur monétaire immédiat. BCE en attentisme assumé. Défis structurels européens pèsent moyen terme. EUR stable range avec volatilité limitée.",
+                
+                strengths: "Stabilité BCE • Indépendance institutionnelle forte • Communication claire • Anticipations inflation ancrées",
+                weaknesses: "Croissance 'médiocre' (FMI) • Défis structurels profonds • Fragmentation européenne • Manque compétitivité vs US/Chine"
+            },
+
+            GBP: {
+                name: "Livre sterling",
+                flag: "🇬🇧",
+                rate: "4.00%",
+                lastAction: "Maintien (5/11)",
+                bias: { type: "bearish", label: "🟠 Légèrement Baissier", strength: -25 },
+                
+                calendar: "Pas de publications majeures cette semaine • Prochaine décision: 18 décembre 2025",
+                
+                news: [
+                    "MPC Vote 5-4 pour maintien à 4.00% (4 membres voulaient baisse à 3.75%)",
+                    "CPI: Pic 3.8% atteint (juil-sept) • Déclin vers 2% attendu sur 12 mois",
+                    "Inflation services et salaires: Baisse progressive",
+                    "Marché travail: Slack croissant • Chômage: Légère hausse"
+                ],
+                
+                quotes: [
+                    {
+                        text: "Upside risks to inflation have become less pressing since August, and I see further policy easing to come if disinflation becomes more clearly established.",
+                        source: "Andrew Bailey, Minutes BoE 5 novembre"
+                    }
+                ],
+                
+                analysis: "Vote 5-4 révèle division interne profonde. Momentum baisse ralenti mais présent. Sterling sous pression vs USD, neutre vs EUR.",
+                
+                strengths: "Inflation en déclin clair (pic dépassé) • Forward guidance Bailey claire • Désinflationniste confirmée",
+                weaknesses: "Vote serré montre pression forte • Économie faible (conso 0.1% Q2) • Division MPC crée incertitude"
+            },
+
+            JPY: {
+                name: "Yen japonais",
+                flag: "🇯🇵",
+                rate: "0.50%",
+                lastAction: "Maintien (Oct)",
+                bias: { type: "bullish", label: "🟢 Neutre-Haussier", strength: 40 },
+                
+                calendar: "Summary of Opinions (10/11) • Revision Monetary Survey (14/11)",
+                
+                news: [
+                    "MPM Octobre: Taux maintenu 0.50% (vote unanime)",
+                    "2 membres proposaient hausse 0.75% en septembre (rejetée)",
+                    "Économie: Au-dessus potentiel • Cycle vertueux salaires-prix maintenu",
+                    "Objectif inflation 2%: Proche d'être atteint durablement"
+                ],
+                
+                quotes: [
+                    {
+                        text: "Although the timing at which the Bank should raise the policy interest rate is getting closer, it is appropriate to take a little more time to examine the situation.",
+                        source: "Summary of Opinions MPM, 10 novembre 2025"
+                    },
+                    {
+                        text: "Given that real interest rates are at significantly low levels, if the baseline scenario for economic activity and prices is realized, the Bank will continue to raise the policy interest rate.",
+                        source: "Gouverneur Ueda, 3 octobre 2025"
+                    }
+                ],
+                
+                analysis: "BoJ SEULE BC majeure en resserrement graduel. Timing hausses se rapproche (Q1 2026 probable 0.75%). JPY devrait se renforcer moyen terme.",
+                
+                strengths: "UNIQUE: Seule BC en resserrement • Normalisation confirmée • Économie > potentiel • Cycle salaires-prix vertueux",
+                weaknesses: "Incertitudes tarifs US • Volatilité marchés globaux • Timing prudent • Risque déstabilisation si trop rapide"
+            },
+
+            CAD: {
+                name: "Dollar canadien",
+                flag: "🇨🇦",
+                rate: "2.25%",
+                lastAction: "Baisse 0.25% (29/10)",
+                bias: { type: "bearish", label: "🔴 Baissier", strength: -35 },
+                
+                calendar: "Market Participants Survey Q3 (10/11) • Summary of Deliberations (12/11)",
+                
+                news: [
+                    "BoC: Baisse 0.25% à 2.25% (2ème consécutive)",
+                    "Croissance H2 2025: ~0.75% (très modeste) • 2026: 1.4%",
+                    "Tarifs US: Impact majeur - 2 scénarios analysés par BoC",
+                    "Risque récession: Élevé (~30-40% selon enquêtes)"
+                ],
+                
+                quotes: [
+                    {
+                        text: "US tariffs and trade uncertainty have weakened the Canadian economy. We expect very modest growth through the rest of the year.",
+                        source: "Tiff Macklem, House of Commons 5 novembre"
+                    }
+                ],
+                
+                analysis: "BoC en cycle baisses actif et assumé. Choc commercial US pèse lourdement. CAD sous pression fondamentale persistante avec baisses additionnelles probables.",
+                
+                strengths: "Inflation sous contrôle (2%) • BoC réactive • Communication claire",
+                weaknesses: "Économie très affaiblie (0.75% H2) • Choc commercial majeur (tarifs US) • Dépendance USA 75% exports • Cycle baisses actif"
+            },
+
+            AUD: {
+                name: "Dollar australien",
+                flag: "🇦🇺",
+                rate: "3.60%",
+                lastAction: "Maintien (4/11)",
+                bias: { type: "neutral", label: "🟡 Neutre", strength: 5 },
+                
+                calendar: "Pas de publications majeures • Prochaine décision: 8-9 décembre 2025",
+                
+                news: [
+                    "RBA: Cash rate maintenu 3.60%",
+                    "Trimmed mean inflation Q3: 3.0% (vs 2.7% attendu) - Plus élevé que prévu",
+                    "Consommation Q2: +0.1% (très faible) • Chômage: 4.5% (sept) vs 4.3% (août)",
+                    "RBA jugement: Partie hausse inflation Q3 due facteurs temporaires"
+                ],
+                
+                quotes: [
+                    {
+                        text: "The Board's judgement is that some of the increase in underlying inflation in the September quarter was due to temporary factors.",
+                        source: "RBA Statement, 4 novembre 2025"
+                    }
+                ],
+                
+                analysis: "RBA en pause d'évaluation après -75bp. Inflation sticky justifie prudence. Cash rate proche neutre. AUD range-bound, sensible données inflation/emploi.",
+                
+                strengths: "Inflation élevée donne marge manœuvre • Marché travail tendu • Transmission baisses en cours • Proche taux neutre",
+                weaknesses: "Inflation > cible (3.0% vs 2-3%) • Inflation sticky persistante • Consommation faible • Incertitudes Chine/tarifs"
+            },
+
+            NZD: {
+                name: "Dollar néo-zélandais",
+                flag: "🇳🇿",
+                rate: "2.50%",
+                lastAction: "Baisse 0.50% (Oct)",
+                bias: { type: "bearish", label: "🔴 Baissier", strength: -40 },
+                
+                calendar: "Prochaine décision: 26 novembre 2025 (MPS + conférence presse)",
+                
+                news: [
+                    "OCR abaissé à 2.50% (depuis 3.00%) - Baisse AGRESSIVE 0.50%",
+                    "MPC débat: 0.25% vs 0.50% • Choisi 0.50% (économie plus faible que prévu)",
+                    "Spare capacity très élevée • GDP Q2: Contraction plus large qu'estimé",
+                    "CPI: 2.7% Q2, 3.0% Q3 projeté • Retour vers 2% attendu H1 2026"
+                ],
+                
+                quotes: [
+                    {
+                        text: "The Committee remains open to further reductions in the OCR as required for inflation to settle sustainably near the 2 percent target mid-point in the medium term.",
+                        source: "RBNZ Statement, Octobre 2025"
+                    }
+                ],
+                
+                analysis: "RBNZ cycle baisses agressif assumé. Spare capacity significative justifie action rapide. Novembre: Baisse 0.25-0.50% très probable.",
+                
+                strengths: "Politique claire et communiquée • RBNZ réactive • Inflation ancrée (2%) • Export prices élevés",
+                weaknesses: "Spare capacity très élevée • Économie faible (contraction Q2) • Emploi en baisse • Investissement atone • Sensibilité risk-off"
+            },
+
+            CHF: {
+                name: "Franc suisse",
+                flag: "🇨🇭",
+                rate: "0.50%",
+                lastAction: "Maintien (Sep)",
+                bias: { type: "neutral", label: "🟡 Neutre-Haussier", strength: 20 },
+                
+                calendar: "Exchange rates (3/11, 7/11) • Discours funding bancaire (13/11 - Moser & Peterhans)",
+                
+                news: [
+                    "SNB policy rate: 0.50% • Cycle assouplissement bien avancé (-1.75% depuis 2024)",
+                    "PROCHE DU PLANCHER (0.25-0.50%) • Marge manœuvre limitée",
+                    "Coûts funding bancaire: +10bp vs moyenne 10 ans",
+                    "Inflation: 2024: 1.1% • 2025: 0.3% • 2026: 0.8% (très contenue)"
+                ],
+                
+                quotes: [
+                    {
+                        text: "Despite this rise in funding costs, credit growth in Switzerland remains robust and our monetary policy stimuli are taking effect via the credit markets.",
+                        source: "Moser & Peterhans, Discours 13 novembre sur funding bancaire"
+                    }
+                ],
+                
+                analysis: "SNB cycle très avancé, proche plancher technique. CHF safe-haven valorisé dans environnement incertain. Stable à légèrement appréciatif.",
+                
+                strengths: "Safe-haven status unique • Proche plancher taux (support) • Stabilité institutionnelle SNB • Crédit robuste",
+                weaknesses: "Coûts funding +10bp • Marge manœuvre limitée (0.50%) • Croissance modeste 1.0-1.5% • Risque appréciation excessive si risk-off"
+            }
+        };
+
+        let currentCurrency = 'USD';
+
+        // Génération graphique force relative
+        function renderStrengthChart() {
+            const currencies = Object.entries(currencyData).sort((a, b) => b[1].bias.strength - a[1].bias.strength);
+            
+            return currencies.map(([code, data]) => {
+                const absStrength = Math.abs(data.bias.strength);
+                const width = (absStrength / 40) * 100; // Normalisation sur 100%
+                const colorClass = data.bias.type === 'bullish' ? 'strength-bullish' : 
+                                 data.bias.type === 'bearish' ? 'strength-bearish' : 'strength-neutral';
+                
+                return `
+                    <div class="currency-strength-bar">
+                        <div class="currency-label">${data.flag} ${code}</div>
+                        <div class="strength-bar">
+                            <div class="strength-fill ${colorClass}" style="width: ${width}%">
+                                ${data.bias.strength > 0 ? '+' : ''}${data.bias.strength}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Navigation devises
+        function renderNav() {
+            return Object.keys(currencyData).map(currency => {
+                const data = currencyData[currency];
+                const isActive = currency === currentCurrency;
+                return `
+                    <button 
+                        class="nav-button ${isActive ? 'active' : ''}"
+                        onclick="changeCurrency('${currency}')"
+                    >
+                        <span>${data.flag}</span>
+                        <span>${currency}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        // Contenu devise
+        function renderContent() {
+            const data = currencyData[currentCurrency];
+            
+            return `
+                <div class="currency-header">
+                    <span class="currency-flag">${data.flag}</span>
+                    <div class="currency-title">
+                        <h2>${data.name}</h2>
+                        <div style="color: #666; font-size: 1.1rem;">${currentCurrency}</div>
+                    </div>
+                    ${data.rate !== 'N/A' ? `<div class="rate-badge">${data.rate}</div>` : ''}
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                    <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px;">Dernière Action</div>
+                        <div style="font-size: 1.3rem; font-weight: bold;">${data.lastAction}</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                        <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 5px;">Biais</div>
+                        <div style="font-size: 1.3rem; font-weight: bold;">${data.bias.label}</div>
+                    </div>
+                </div>
+
+                <h3 style="color: #1a1a2e; margin: 25px 0 15px 0; font-size: 1.4rem;">📅 Calendrier</h3>
+                <div class="info-box ${currentCurrency === 'USD' || currentCurrency === 'GBP' ? 'warning' : ''}">
+                    ${data.calendar}
+                </div>
+
+                <h3 style="color: #1a1a2e; margin: 25px 0 15px 0; font-size: 1.4rem;">📰 Actualités Clés</h3>
+                ${data.news.map(item => `<div class="info-box">• ${item}</div>`).join('')}
+
+                ${data.fedwatch ? `
+                    <div class="info-box warning">
+                        <strong>CME FedWatch</strong><br>
+                        ${data.fedwatch}
+                    </div>
+                ` : ''}
+
+                ${data.quotes ? `
+                    <h3 style="color: #1a1a2e; margin: 25px 0 15px 0; font-size: 1.4rem;">💬 Citations Importantes</h3>
+                    ${data.quotes.map(q => `
+                        <div class="quote-box">
+                            "${q.text}"<br>
+                            <strong style="font-style: normal; font-size: 0.9rem; margin-top: 8px; display: block;">
+                                — ${q.source}
+                            </strong>
+                        </div>
+                    `).join('')}
+                ` : ''}
+
+                <h3 style="color: #1a1a2e; margin: 25px 0 15px 0; font-size: 1.4rem;">💡 Analyse</h3>
+                <div class="info-box">
+                    ${data.analysis}
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+                    <div class="info-box success">
+                        <strong>✅ Forces</strong><br>
+                        ${data.strengths}
+                    </div>
+                    <div class="info-box warning">
+                        <strong>⚠️ Faiblesses</strong><br>
+                        ${data.weaknesses}
+                    </div>
+                </div>
+            `;
+        }
+
+        function changeCurrency(currency) {
+            currentCurrency = currency;
+            document.getElementById('currencyNav').innerHTML = renderNav();
+            document.getElementById('currencyContent').innerHTML = renderContent();
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('strengthChart').innerHTML = renderStrengthChart();
+            document.getElementById('currencyNav').innerHTML = renderNav();
+            document.getElementById('currencyContent').innerHTML = renderContent();
+        });
+    </script>
+</body>
+</html>
